@@ -1,0 +1,28 @@
+[package]
+name = "iced_tools"
+version = "0.1.0"
+edition = "2021"
+
+build = "build.rs"
+
+[features]
+date_picker = ["chrono"]
+
+[dependencies]
+iced = {version = "0.10.0" ,features = ["tokio","image"]}
+iced_aw = { version = "0.7", features = ["date_picker"] }
+tokio = { version = "1.33",features = ["default"]}
+tokio-util = {version = "0.7.9",features = ["net","compat"]}
+chrono = { version = "0.4.31", optional = true }
+time = { version = "0.3.29", features = ["local-offset"] }
+tiberius={version="0.12.2",features = ["chrono","tds73"],default-features = false}
+image = { version = "0.24.7",features = ["png"]}
+
+[profile.release]
+lto = true
+opt-level = 3
+overflow-checks = false
+strip = true
+
+[build-dependencies]
+embed-resource = "2.4"
